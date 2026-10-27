@@ -1,0 +1,5 @@
+build/
+__pycache__/
+*.pyc
+_pythons.js
+_web_check*.png

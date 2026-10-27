@@ -1,0 +1,192 @@
+{
+  "art": {
+    "dir": "assets",
+    "floor": "floor.png",
+    "picture_size": 48,
+    "blades": "sword.png",
+    "gems": [
+      { "min_xp": 2, "picture": "gem_pink.png" },
+      { "min_xp": 1, "picture": "gem_blue.png" }
+    ]
+  },
+  "hero": {
+    "speed": 120.0,
+    "max_hp": 100.0,
+    "hit_radius": 12.0,
+    "magnet_radius": 60.0,
+    "walk_deadzone": 12.0,
+    "picture": "hero.png",
+    "start_weapons": ["spark_wand"]
+  },
+  "growth": {
+    "xp_first": 5,
+    "xp_step": 3,
+    "max_level": 5,
+    "max_weapons": 3,
+    "cards": 3,
+    "heal_card_hp": 30,
+    "heal_card_name": "Heal",
+    "gem_speed": 300.0,
+    "gem_radius": 10.0
+  },
+  "weapons": {
+    "spark_wand": {
+      "name": "Spark Wand",
+      "short": "Spark",
+      "mode": "projectile",
+      "card_text": "Shoots a spark at the nearest enemy",
+      "per_level_text": "+3 damage, 0.08 s faster, more sparks",
+      "base": {
+        "damage": 20.0,
+        "cooldown": 0.8,
+        "count": 1,
+        "speed": 400.0,
+        "lifetime": 2.5,
+        "radius_bonus": 0.0
+      },
+      "per_level": { "damage": 3.0, "cooldown": -0.08 },
+      "extra_count_at_levels": [3, 5]
+    },
+    "spin_blades": {
+      "name": "Spin Blades",
+      "short": "Blades",
+      "mode": "orbit",
+      "card_text": "Blades circle around you",
+      "per_level_text": "+3 damage, more blades",
+      "base": {
+        "damage": 8.0,
+        "count": 2,
+        "orbit_radius": 60.0,
+        "turn_s": 1.5,
+        "hit_cooldown": 0.5,
+        "blade_radius": 10.0
+      },
+      "per_level": { "damage": 3.0 },
+      "extra_count_at_levels": [2, 4]
+    },
+    "holy_ring": {
+      "name": "Holy Ring",
+      "short": "Ring",
+      "mode": "ring",
+      "card_text": "Hurts every enemy close to you",
+      "per_level_text": "+2 damage, +10 px radius",
+      "base": { "damage": 5.0, "radius": 50.0, "cooldown": 0.5 },
+      "per_level": { "damage": 2.0, "radius": 10.0 }
+    }
+  },
+  "passives": {
+    "swift_boots": {
+      "name": "Swift Boots",
+      "short": "Boots",
+      "per_level_text": "+10% walking speed",
+      "per_level": { "speed_pct": 0.1 }
+    },
+    "big_heart": {
+      "name": "Big Heart",
+      "short": "Heart",
+      "per_level_text": "+20 max HP and heal 20",
+      "per_level": { "max_hp": 20.0 },
+      "pick_heal": 20.0
+    },
+    "magnet": {
+      "name": "Magnet",
+      "short": "Magnet",
+      "per_level_text": "+30 px gem magnet radius",
+      "per_level": { "magnet_radius": 30.0 }
+    }
+  },
+  "enemies": {
+    "bat": {
+      "name": "Bat",
+      "hp": 8.0,
+      "speed": 100.0,
+      "damage": 5.0,
+      "xp": 1,
+      "hit_radius": 10.0,
+      "projectile_radius": 6.0,
+      "picture": "bat.png"
+    },
+    "slime": {
+      "name": "Slime",
+      "hp": 30.0,
+      "speed": 55.0,
+      "damage": 8.0,
+      "xp": 2,
+      "hit_radius": 12.0,
+      "projectile_radius": 8.0,
+      "picture": "slime.png"
+    },
+    "ghost": {
+      "name": "Ghost",
+      "hp": 15.0,
+      "speed": 135.0,
+      "damage": 6.0,
+      "xp": 2,
+      "hit_radius": 10.0,
+      "projectile_radius": 6.0,
+      "picture": "ghost.png"
+    },
+    "demon": {
+      "name": "Demon",
+      "boss": true,
+      "hp": 800.0,
+      "speed": 85.0,
+      "damage": 20.0,
+      "xp": 0,
+      "hit_radius": 22.0,
+      "projectile_radius": 18.0,
+      "picture": "demon.png",
+      "picture_size": 96
+    }
+  },
+  "win_time": 120.0,
+  "spawn": {
+    "interval": 1.0,
+    "max_per_tick": 8,
+    "circle_radius": 380.0,
+    "cull_radius": 700.0,
+    "alive_cap": 120,
+    "boss_return_radius": 600.0,
+    "table": [
+      { "from_s": 0.0, "types": ["bat"], "min_alive": 12 },
+      { "from_s": 15.0, "types": ["bat"], "min_alive": 20 },
+      { "from_s": 30.0, "types": ["bat", "slime"], "min_alive": 28 },
+      { "from_s": 45.0, "types": ["slime", "ghost"], "min_alive": 36 },
+      { "from_s": 60.0, "types": ["bat", "ghost"], "min_alive": 45 },
+      { "from_s": 75.0, "types": ["bat", "slime", "ghost"], "min_alive": 55 },
+      { "from_s": 90.0, "types": ["bat", "slime"], "min_alive": 55, "boss": "demon" },
+      { "from_s": 105.0, "types": ["bat"], "min_alive": 75 }
+    ]
+  },
+  "contact_cooldown": 0.5,
+  "feel": {
+    "number_lifetime": 0.6,
+    "number_rise": 55.0,
+    "number_jitter": 12.0,
+    "number_max": 30,
+    "number_size": 18,
+    "flash_lifetime": 0.2,
+    "flash_grow": 22.0,
+    "flash_color": [255, 255, 255],
+    "hurt_shake_s": 0.16,
+    "hurt_shake_px": 4.0
+  },
+  "sounds": {
+    "dir": "sounds",
+    "volume": 0.5,
+    "gap": { "hit": 0.09, "gem": 0.09, "hurt": 0.12 },
+    "files": {
+      "hit": "hit.wav",
+      "gem": "gem.wav",
+      "level": "level.wav",
+      "hurt": "hurt.wav",
+      "win": "win.wav",
+      "lose": "lose.wav"
+    }
+  },
+  "world": {
+    "screen_w": 390,
+    "screen_h": 700,
+    "tile": 48
+  }
+}
